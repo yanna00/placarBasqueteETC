@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+.team {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.team-name {
+    cursor: pointer;
+}
+
+.team-name-input {
+    display: none;
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.score {
+    font-size: 48px;
+    margin: 10px 0;
+}
+
+.fouls {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #ffcc00;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.reset {
+    background: red;
+    color: white;
+}
+
+.add {
+    background: green;
+    color: white;
+}
+
+.remove {
+    background: red;
+    color: white;
+}
+
+.timer {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    margin: 0 auto 20px;
+}
+
+#timer {
+    font-size: 36px;
+    margin: 10px 0;
+}
+
+.cronometro-regressivo24 {
+    margin-top: 20px;
+}
+
+#timer-regressivo {
+    font-size: 36px;
+    margin: 10px 0;
+}
