@@ -1,158 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Placar de Basquete</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #222;
-        color: white;
-        text-align: center;
-        padding: 20px;
-    }
-    h1 {
-        margin-bottom: 20px;
-    }
-    .scoreboard {
-        display: flex;
-        justify-content: center;
-        gap: 50px;
-        margin-bottom: 20px;
-    }
-    .team {
-        background: #333;
-        padding: 20px;
-        border-radius: 10px;
-        width: 200px;
-    }
-    .score {
-        font-size: 48px;
-        margin: 10px 0;
-    }
-    button {
-        margin: 5px;
-        padding: 10px 15px;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        opacity: 0.8;
-    }
-    .reset {
-        background: red;
-        color: white;
-    }
-    .add {
-        background: green;
-        color: white;
-    }
-    .remove {
-        background: red;
-        color: white;
-    }
-    .timer {
-        background: #333;
-        padding: 20px;
-        border-radius: 10px;
-        width: 200px;
-        margin: 0 auto 20px;
-    }
-    #timer {
-        font-size: 36px;
-        margin: 10px 0;
-    }
-    
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placar de Basquete</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 20px;
+        }
+
+        .team {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 200px;
+        }
+
+        .score {
+            font-size: 48px;
+            margin: 10px 0;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .reset {
+            background: red;
+            color: white;
+        }
+
+        .add {
+            background: green;
+            color: white;
+        }
+
+        .remove {
+            background: red;
+            color: white;
+        }
+
+        .timer {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 200px;
+            margin: 0 auto 20px;
+        }
+
+        #timer {
+            font-size: 36px;
+            margin: 10px 0;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>🏀 Placar de Basquete</h1>
-<div class="scoreboard">
-    <div class="team" id="teamA">
-        <h2>Time A</h2>
-        <div class="score" id="scoreA">0</div>
-        <button class="add" onclick="addPoints('A', 1)">+1</button>
-        <button class="add" onclick="addPoints('A', 2)">+2</button>
-        <button class="add" onclick="addPoints('A', 3)">+3</button>
-        <button class="remove" onclick="addPoints('A', -1)">-1</button>
-        <button class="remove" onclick="addPoints('A', -2)">-2</button>
-        <button class="remove" onclick="addPoints('A', -3)">-3</button>
+    <h1>🏀 Placar de Basquete</h1>
+    <div class="scoreboard">
+        <div class="team" id="teamA">
+            <h2>Time A</h2>
+            <div class="score" id="scoreA">0</div>
+            <button class="add" onclick="addPoints('A', 1)">+1</button>
+            <button class="add" onclick="addPoints('A', 2)">+2</button>
+            <button class="add" onclick="addPoints('A', 3)">+3</button>
+            <button class="remove" onclick="addPoints('A', -1)">-1</button>
+            <button class="remove" onclick="addPoints('A', -2)">-2</button>
+            <button class="remove" onclick="addPoints('A', -3)">-3</button>
+        </div>
+
+        <div class="timer">
+            <h2>⏱️ Cronômetro</h2>
+            <div id="timer">00:00</div>
+            <button onclick="startTimer()">Iniciar</button>
+            <button onclick="stopTimer()">Parar</button>
+            <button onclick="resetTimer()">Reiniciar</button>
+        </div>
+
+        <div class="team" id="teamB">
+            <h2>Time B</h2>
+            <div class="score" id="scoreB">0</div>
+            <button class="add" onclick="addPoints('B', 1)">+1</button>
+            <button class="add" onclick="addPoints('B', 2)">+2</button>
+            <button class="add" onclick="addPoints('B', 3)">+3</button>
+            <button class="remove" onclick="addPoints('B', -1)">-1</button>
+            <button class="remove" onclick="addPoints('B', -2)">-2</button>
+            <button class="remove" onclick="addPoints('B', -3)">-3</button>
+        </div>
+
+
     </div>
+    <div class="cronometro-regressivo24">
+        <h2>⏱️ Cronômetro Regressivo</h2>
+        <div id="timer-regressivo">00:24</div>
+        <button id="toggle-timer-regressivo" onclick="toggleTimerRegressivo()">Iniciar</button>
+        <button onclick="resetTimerRegressivo()">Reiniciar</button>
 
-<div class="timer">
-    <h2>⏱️ Cronômetro</h2>
-    <div id="timer">00:00</div>
-    <button onclick="startTimer()">Iniciar</button>
-    <button onclick="stopTimer()">Parar</button>
-    <button onclick="resetTimer()">Reiniciar</button>
-</div>
-
-    <div class="team" id="teamB">
-        <h2>Time B</h2>
-        <div class="score" id="scoreB">0</div>
-        <button class="add" onclick="addPoints('B', 1)">+1</button>
-        <button class="add" onclick="addPoints('B', 2)">+2</button>
-        <button class="add" onclick="addPoints('B', 3)">+3</button> 
-        <button class="remove" onclick="addPoints('B', -1)">-1</button>
-        <button class="remove" onclick="addPoints('B', -2)">-2</button>
-        <button class="remove" onclick="addPoints('B', -3)">-3</button>
     </div>
-</div>
+    <button class="reset" onclick="resetScore()">🔄 Reiniciar</button>
 
-<button class="reset" onclick="resetScore()">🔄 Reiniciar</button>
+    <script>
+        // Placar inicial
+        let scoreA = 0;
+        let scoreB = 0;
 
-<script>
-    // Placar inicial
-    let scoreA = 0;
-    let scoreB = 0;
+        // Função para adicionar pontos
+        function addPoints(team, points) {
+            if (team === 'A' && scoreA + points >= 0) {
+                scoreA += points;
+                document.getElementById('scoreA').textContent = scoreA;
+            } else if (team === 'B' && scoreB + points >= 0) {
+                scoreB += points;
+                document.getElementById('scoreB').textContent = scoreB;
+            }
+        }
 
-    // Função para adicionar pontos
-    function addPoints(team, points) {
-        if (team === 'A' && scoreA + points >= 0) {
-            scoreA += points;
+        // Função para reiniciar o placar
+        function resetScore() {
+            scoreA = 0;
+            scoreB = 0;
             document.getElementById('scoreA').textContent = scoreA;
-        } else if (team === 'B' && scoreB + points >= 0) {
-            scoreB += points;
             document.getElementById('scoreB').textContent = scoreB;
         }
-    }
 
-    // Função para reiniciar o placar
-    function resetScore() {
-        scoreA = 0;
-        scoreB = 0;
-        document.getElementById('scoreA').textContent = scoreA;
-        document.getElementById('scoreB').textContent = scoreB;
-    }
-
-    function startTimer() {
-        if (!timerInterval) {
-            timerInterval = setInterval(updateTimer, 1000);
+        function startTimer() {
+            if (!timerInterval) {
+                timerInterval = setInterval(updateTimer, 1000);
+            }
         }
-    }
-    function stopTimer() {
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
-    function resetTimer() {
-        stopTimer();
-        timerSeconds = 0;
-        document.getElementById('timer').textContent = '00:00';
-    }   
-    let timerInterval = null;
-    let timerSeconds = 0;
-    function updateTimer() {
-        timerSeconds++;
-        const minutes = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
-        const seconds = (timerSeconds % 60).toString().padStart(2, '0');
-        document.getElementById('timer').textContent = `${minutes}:${seconds}`;
-    }
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        function resetTimer() {
+            stopTimer();
+            timerSeconds = 0;
+            document.getElementById('timer').textContent = '00:00';
+        }
+        let timerInterval = null;
+        let timerSeconds = 0;
+        function updateTimer() {
+            timerSeconds++;
+            const minutes = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+            const seconds = (timerSeconds % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+        }
+        let timerRegressivoInterval = null;
+        let timerRegressivoSeconds = 24;
+        function toggleTimerRegressivo() {
+            const button = document.getElementById('toggle-timer-regressivo');
+            if (timerRegressivoInterval) {
+                stopTimerRegressivo();
+                button.textContent = 'Iniciar';
+            } else if (timerRegressivoSeconds > 0) {
+                timerRegressivoInterval = setInterval(updateTimerRegressivo, 1000);
+                button.textContent = 'Parar';
+            }
+        }
+        function stopTimerRegressivo() {
+            clearInterval(timerRegressivoInterval);
+            timerRegressivoInterval = null;
+        }
+        function resetTimerRegressivo() {
+            stopTimerRegressivo();
+            timerRegressivoSeconds = 24;
+            document.getElementById('timer-regressivo').textContent = '00:24';
+            document.getElementById('toggle-timer-regressivo').textContent = 'Iniciar';
+        }
+        function updateTimerRegressivo() {
+            if (timerRegressivoSeconds <= 0) {
+                stopTimerRegressivo();
+                document.getElementById('toggle-timer-regressivo').textContent = 'Iniciar';
+                alert('Tempo esgotado!');
+                return;
+            }
+            timerRegressivoSeconds--;
+            const minutes = Math.floor(timerRegressivoSeconds / 60).toString().padStart(2, '0');
+            const seconds = (timerRegressivoSeconds % 60).toString().padStart(2, '0');
+            document.getElementById('timer-regressivo').textContent = `${minutes}:${seconds}`;
+            if (timerRegressivoSeconds === 0) {
+                stopTimerRegressivo();
+                document.getElementById('toggle-timer-regressivo').textContent = 'Iniciar';
+                alert('Tempo esgotado!');
+            }
+        }
 
-</script>
+    </script>
 
 </body>
+
 </html>
