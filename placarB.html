@@ -112,7 +112,7 @@
 
         <div class="timer">
             <h2>⏱️ Cronômetro</h2>
-            <div id="timer">00:00</div>
+            <div id="timer">00:00:00</div>
             <button onclick="startTimer()">Iniciar</button>
             <button onclick="stopTimer()">Parar</button>
             <button onclick="resetTimer()">Reiniciar</button>
@@ -177,15 +177,16 @@
         function resetTimer() {
             stopTimer();
             timerSeconds = 0;
-            document.getElementById('timer').textContent = '00:00';
+            document.getElementById('timer').textContent = '00:00:00';
         }
         let timerInterval = null;
         let timerSeconds = 0;
         function updateTimer() {
             timerSeconds++;
+            const hours = Math.floor(timerSeconds / 3600).toString().padStart(2, '0');
             const minutes = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
             const seconds = (timerSeconds % 60).toString().padStart(2, '0');
-            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+            document.getElementById('timer').textContent = `${hours}:${minutes}:${seconds}`;
         }
 
         function editTeamName(team) {
