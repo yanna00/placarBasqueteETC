@@ -55,3 +55,49 @@
 <body>
 
 <h1>🏀 Placar de Basquete</h1>
+<div class="scoreboard">
+    <div class="team" id="teamA">
+        <h2>Time A</h2>
+        <div class="score" id="scoreA">0</div>
+        <button class="add" onclick="addPoints('A', 1)">+1</button>
+        <button class="add" onclick="addPoints('A', 2)">+2</button>
+        <button class="add" onclick="addPoints('A', 3)">+3</button>
+    </div>
+    <div class="team" id="teamB">
+        <h2>Time B</h2>
+        <div class="score" id="scoreB">0</div>
+        <button class="add" onclick="addPoints('B', 1)">+1</button>
+        <button class="add" onclick="addPoints('B', 2)">+2</button>
+        <button class="add" onclick="addPoints('B', 3)">+3</button>
+    </div>
+</div>
+
+<button class="reset" onclick="resetScore()">🔄 Reiniciar</button>
+
+<script>
+    // Placar inicial
+    let scoreA = 0;
+    let scoreB = 0;
+
+    // Função para adicionar pontos
+    function addPoints(team, points) {
+        if (team === 'A') {
+            scoreA += points;
+            document.getElementById('scoreA').textContent = scoreA;
+        } else if (team === 'B') {
+            scoreB += points;
+            document.getElementById('scoreB').textContent = scoreB;
+        }
+    }
+
+    // Função para reiniciar o placar
+    function resetScore() {
+        scoreA = 0;
+        scoreB = 0;
+        document.getElementById('scoreA').textContent = scoreA;
+        document.getElementById('scoreB').textContent = scoreB;
+    }
+</script>
+
+</body>
+</html>
