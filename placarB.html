@@ -194,21 +194,13 @@
             document.getElementById('toggle-timer-regressivo').textContent = 'Iniciar';
         }
         function updateTimerRegressivo() {
-            if (timerRegressivoSeconds <= 0) {
-                stopTimerRegressivo();
-                document.getElementById('toggle-timer-regressivo').textContent = 'Iniciar';
-                alert('Tempo esgotado!');
-                return;
-            }
             timerRegressivoSeconds--;
+            if (timerRegressivoSeconds < 0) {
+                timerRegressivoSeconds = 24;
+            }
             const minutes = Math.floor(timerRegressivoSeconds / 60).toString().padStart(2, '0');
             const seconds = (timerRegressivoSeconds % 60).toString().padStart(2, '0');
             document.getElementById('timer-regressivo').textContent = `${minutes}:${seconds}`;
-            if (timerRegressivoSeconds === 0) {
-                stopTimerRegressivo();
-                document.getElementById('toggle-timer-regressivo').textContent = 'Iniciar';
-                alert('Tempo esgotado!');
-            }
         }
 
     </script>
