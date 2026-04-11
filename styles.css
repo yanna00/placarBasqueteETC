@@ -142,8 +142,14 @@ input {
 
 /* Tablet: 2 columns */
 @media (min-width: 768px) and (max-width: 1023px) {
+  .team-card{
+    margin: 0 auto;
+  }
+  .team-card{
+    width: 50%;
+  }
   .scoreboard {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--spacing-xl);
   }
 
