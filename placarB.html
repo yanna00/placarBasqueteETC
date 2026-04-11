@@ -1,65 +1,132 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Placar digital profissional para jogos de basquete com cronômetro e controle de faltas" />
+    <title>Placar Basquete ETC</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Placar de Basquete</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1 class="app-title">🏀 Placar de Basquete</h1>
+      </header>
 
-<body>
+      <main class="app-main">
+        <!-- Scoreboard Section -->
+        <section class="scoreboard" role="region" aria-label="Placar de pontuação">
+          <!-- Team A -->
+          <article class="team-card" id="teamA">
+            <div class="team-card__header">
+              <h2 class="team-card__title" id="teamA-name" onclick="editTeamName('A')" role="button" tabindex="0">Time A</h2>
+              <input
+                id="teamA-input"
+                class="team-card__input"
+                type="text"
+                aria-label="Editar nome do Time A"
+                onkeydown="handleTeamNameKey(event, 'A')"
+                onblur="saveTeamName('A')"
+              />
+            </div>
 
-    <h1>🏀 Placar de Basquete</h1>
-    <div class="scoreboard">
-        <div class="team" id="teamA">
-            <h2 id="teamA-name" class="team-name" onclick="editTeamName('A')" role="button" tabindex="0">Time A</h2>
-            <input id="teamA-input" class="team-name-input" type="text" onkeydown="handleTeamNameKey(event, 'A')" onblur="saveTeamName('A')" aria-label="Editar nome do Time A" />
-            <div class="score" id="scoreA" aria-label="Pontuação do Time A">0</div>
-            <div class="fouls" id="foulsA" aria-label="Faltas do Time A">0</div>
-            <button class="add" onclick="addPoints('A', 1)" aria-label="Adicionar 1 ponto ao Time A">+1</button>
-            <button class="add" onclick="addPoints('A', 2)" aria-label="Adicionar 2 pontos ao Time A">+2</button>
-            <button class="add" onclick="addPoints('A', 3)" aria-label="Adicionar 3 pontos ao Time A">+3</button>
-            <button class="remove" onclick="addPoints('A', -1)" aria-label="Remover 1 ponto do Time A">-1</button>
-            <button class="remove" onclick="addPoints('A', -2)" aria-label="Remover 2 pontos do Time A">-2</button>
-            <button class="remove" onclick="addPoints('A', -3)" aria-label="Remover 3 pontos do Time A">-3</button>
-            <button class="add" onclick="addFouls('A', 1)" aria-label="Adicionar 1 falta ao Time A">+1 Falta</button>
-            <button class="remove" onclick="addFouls('A', -1)" aria-label="Remover 1 falta do Time A">-1 Falta</button>
-        </div>
+            <div class="team-card__stat">
+              <div class="score" id="scoreA" aria-live="polite" aria-label="Pontuação do Time A">0</div>
+              <p class="score-label">Pontos</p>
+            </div>
 
-        <div class="timer">
-            <h2>⏱️ Cronômetro</h2>
-            <div id="timer" aria-label="Tempo decorrido">00:00:00</div>
-            <button onclick="startTimer()" aria-label="Iniciar cronômetro">Iniciar</button>
-            <button onclick="stopTimer()" aria-label="Parar cronômetro">Parar</button>
-            <button onclick="resetTimer()" aria-label="Reiniciar cronômetro">Reiniciar</button>
-        </div>
+            <div class="team-card__controls controls-points">
+              <button class="btn btn--size-small btn--add" onclick="addPoints('A', 1)" aria-label="Adicionar 1 ponto ao Time A">+1</button>
+              <button class="btn btn--size-small btn--add" onclick="addPoints('A', 2)" aria-label="Adicionar 2 pontos ao Time A">+2</button>
+              <button class="btn btn--size-small btn--add" onclick="addPoints('A', 3)" aria-label="Adicionar 3 pontos ao Time A">+3</button>
+              <button class="btn btn--size-small btn--remove" onclick="addPoints('A', -1)" aria-label="Remover 1 ponto do Time A">−1</button>
+              <button class="btn btn--size-small btn--remove" onclick="addPoints('A', -2)" aria-label="Remover 2 pontos do Time A">−2</button>
+              <button class="btn btn--size-small btn--remove" onclick="addPoints('A', -3)" aria-label="Remover 3 pontos do Time A">−3</button>
+            </div>
 
-        <div class="team" id="teamB">
-            <h2 id="teamB-name" class="team-name" onclick="editTeamName('B')" role="button" tabindex="0">Time B</h2>
-            <input id="teamB-input" class="team-name-input" type="text" onkeydown="handleTeamNameKey(event, 'B')" onblur="saveTeamName('B')" aria-label="Editar nome do Time B" />
-            <div class="score" id="scoreB" aria-label="Pontuação do Time B">0</div>
-            <div class="fouls" id="foulsB" aria-label="Faltas do Time B">0</div>
-            <button class="add" onclick="addPoints('B', 1)" aria-label="Adicionar 1 ponto ao Time B">+1</button>
-            <button class="add" onclick="addPoints('B', 2)" aria-label="Adicionar 2 pontos ao Time B">+2</button>
-            <button class="add" onclick="addPoints('B', 3)" aria-label="Adicionar 3 pontos ao Time B">+3</button>
-            <button class="remove" onclick="addPoints('B', -1)" aria-label="Remover 1 ponto do Time B">-1</button>
-            <button class="remove" onclick="addPoints('B', -2)" aria-label="Remover 2 pontos do Time B">-2</button>
-            <button class="remove" onclick="addPoints('B', -3)" aria-label="Remover 3 pontos do Time B">-3</button>
-            <button class="add" onclick="addFouls('B', 1)" aria-label="Adicionar 1 falta ao Time B">+1 Falta</button>
-            <button class="remove" onclick="addFouls('B', -1)" aria-label="Remover 1 falta do Time B">-1 Falta</button>
-        </div>
+            <div class="team-card__stat">
+              <div class="fouls" id="foulsA" aria-live="polite" aria-label="Faltas do Time A">0</div>
+              <p class="fouls-label">Faltas</p>
+            </div>
+
+            <div class="team-card__controls controls-fouls">
+              <button class="btn btn--size-medium btn--success" onclick="addFouls('A', 1)" aria-label="Adicionar falta ao Time A">+1 Falta</button>
+              <button class="btn btn--size-medium btn--danger" onclick="addFouls('A', -1)" aria-label="Remover falta do Time A">−1 Falta</button>
+            </div>
+          </article>
+
+          <!-- Timer Section -->
+          <div class="timer-section">
+            <!-- Master Timer -->
+            <article class="timer-card">
+              <h2 class="timer-card__title">⏱️ Cronômetro</h2>
+              <div class="timer-display" id="timer" aria-live="polite" aria-label="Tempo decorrido">00:00:00</div>
+              <div class="timer-card__controls">
+                <button class="btn btn--primary" onclick="startTimer()" aria-label="Iniciar cronômetro">Iniciar</button>
+                <button class="btn btn--secondary" onclick="stopTimer()" aria-label="Parar cronômetro">Parar</button>
+                <button class="btn btn--outline" onclick="resetTimer()" aria-label="Reiniciar cronômetro">Reiniciar</button>
+              </div>
+            </article>
+
+            <!-- 24-Second Timer -->
+            <article class="timer-card timer-card--compact">
+              <h2 class="timer-card__title">⏱️ Ataque (24s)</h2>
+              <div class="timer-display timer-display--compact" id="timer-regressivo" aria-live="polite" aria-label="Tempo de ataque restante">00:24</div>
+              <div class="timer-card__controls">
+                <button class="btn btn--primary" id="toggle-timer-regressivo" onclick="toggleTimerRegressivo()" aria-label="Iniciar/Parar temporizador de ataque">Iniciar</button>
+                <button class="btn btn--outline" onclick="resetTimerRegressivo()" aria-label="Reiniciar temporizador de ataque">Reiniciar</button>
+              </div>
+            </article>
+          </div>
+
+          <!-- Team B -->
+          <article class="team-card" id="teamB">
+            <div class="team-card__header">
+              <h2 class="team-card__title" id="teamB-name" onclick="editTeamName('B')" role="button" tabindex="0">Time B</h2>
+              <input
+                id="teamB-input"
+                class="team-card__input"
+                type="text"
+                aria-label="Editar nome do Time B"
+                onkeydown="handleTeamNameKey(event, 'B')"
+                onblur="saveTeamName('B')"
+              />
+            </div>
+
+            <div class="team-card__stat">
+              <div class="score" id="scoreB" aria-live="polite" aria-label="Pontuação do Time B">0</div>
+              <p class="score-label">Pontos</p>
+            </div>
+
+            <div class="team-card__controls controls-points">
+              <button class="btn btn--size-small btn--add" onclick="addPoints('B', 1)" aria-label="Adicionar 1 ponto ao Time B">+1</button>
+              <button class="btn btn--size-small btn--add" onclick="addPoints('B', 2)" aria-label="Adicionar 2 pontos ao Time B">+2</button>
+              <button class="btn btn--size-small btn--add" onclick="addPoints('B', 3)" aria-label="Adicionar 3 pontos ao Time B">+3</button>
+              <button class="btn btn--size-small btn--remove" onclick="addPoints('B', -1)" aria-label="Remover 1 ponto do Time B">−1</button>
+              <button class="btn btn--size-small btn--remove" onclick="addPoints('B', -2)" aria-label="Remover 2 pontos do Time B">−2</button>
+              <button class="btn btn--size-small btn--remove" onclick="addPoints('B', -3)" aria-label="Remover 3 pontos do Time B">−3</button>
+            </div>
+
+            <div class="team-card__stat">
+              <div class="fouls" id="foulsB" aria-live="polite" aria-label="Faltas do Time B">0</div>
+              <p class="fouls-label">Faltas</p>
+            </div>
+
+            <div class="team-card__controls controls-fouls">
+              <button class="btn btn--size-medium btn--success" onclick="addFouls('B', 1)" aria-label="Adicionar falta ao Time B">+1 Falta</button>
+              <button class="btn btn--size-medium btn--danger" onclick="addFouls('B', -1)" aria-label="Remover falta do Time B">−1 Falta</button>
+            </div>
+          </article>
+        </section>
+
+        <!-- Actions Footer -->
+        <footer class="app-footer">
+          <button class="btn btn--large btn--reset" onclick="resetScore()" aria-label="Reiniciar placar completamente">🔄 Reiniciar Placar</button>
+        </footer>
+      </main>
     </div>
-    <div class="cronometro-regressivo24">
-        <h2>⏱️ Cronômetro Regressivo</h2>
-        <div id="timer-regressivo" aria-label="Tempo restante">00:24</div>
-        <button id="toggle-timer-regressivo" onclick="toggleTimerRegressivo()" aria-label="Alternar cronômetro regressivo">Iniciar</button>
-        <button onclick="resetTimerRegressivo()" aria-label="Reiniciar cronômetro regressivo">Reiniciar</button>
-    </div>
-    <button class="reset" onclick="resetScore()" aria-label="Reiniciar placar">🔄 Reiniciar</button>
 
     <script src="script.js"></script>
-
-</body>
-
+  </body>
 </html>
